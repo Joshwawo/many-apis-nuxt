@@ -29,4 +29,7 @@ export default defineNuxtConfig({
     },
     "/spa": { ssr: false },
   },
+   typescript:{
+    strict: true,
+   }
 });

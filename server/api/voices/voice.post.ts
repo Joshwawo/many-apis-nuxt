@@ -83,7 +83,6 @@ export default defineEventHandler(async (event) => {
   await connectDB();
   console.log("Bandera 1 - defineEventHandler 🔵");
   const body: bodyVoices = await readBody(event);
-  console.log(body)
   if(!body.tts || !body.voice){
     throw createError({
       statusCode: 400,
