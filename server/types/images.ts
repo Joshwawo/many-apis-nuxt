@@ -23,3 +23,8 @@ export interface Image {
 export enum Model {
   StableDiffusion = "stable-diffusion",
 }
+
+export interface susImagesTypes {
+  susImage: { url: string; public_id: string };
+  nsfw:boolean
+}

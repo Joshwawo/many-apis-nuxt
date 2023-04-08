@@ -8,12 +8,14 @@ export const useImageStore = defineStore("images", () =>{
   const imageLimit = ref(5)
   const allowNsfw = ref(true)
   const dataImages = ref<ImagesTypes[]>([])
+  const imageLoading = ref(false)
 
   return {
     imageQuery,
     imageLimit,
     allowNsfw,
-    dataImages
+    dataImages,
+    imageLoading
   }
 
 })

@@ -1,66 +1,118 @@
 <template>
   <div class="text-gray-300">
-    <NForm :rules="RULES">
+    <NForm @submit.prevent="getImages" :rules="RULES">
       <NFormItem path="imageQuery" label="Prompt">
-        <NInput v-model:value="imageQuery" type="text" placeholder="Escribe algo" show-count :style="{}" />
+        <NInput
+          v-model:value="imageQuery"
+          type="text"
+          placeholder="Escribe algo"
+          show-count
+          :style="{}"
+        />
       </NFormItem>
       <NFormItem path="imageLimit" label="imageLimit">
-        <NInputNumber v-model:value="imageLimit" min="0" max="40" placeholder="Escribe algo" show-count :style="{}" />
+        <NInputNumber
+          v-model:value="imageLimit"
+          min="0"
+          max="40"
+          placeholder="Escribe algo"
+          show-count
+          :style="{}"
+        />
       </NFormItem>
       <NSpace>
-        <NCheckbox v-model:checked="allowNsfw" :default-checked="allowNsfw">Allow NSFW</NCheckbox>
+        <NCheckbox v-model:checked="allowNsfw" :default-checked="allowNsfw"
+          >Allow NSFW</NCheckbox
+        >
       </NSpace>
-      <NButton @click="getImages" class="mt-5">Search</NButton>
+      <NButton :attr-type="'submit'" :disabled="imageLoading" class="mt-5">Search</NButton>
     </NForm>
     <template v-if="dataImages.length > 0">
-      <div class="mt-20 columns-5">
-        <div class="" v-for="image in dataImages " :key="image.id"> 
-          <img :src="image.src" :alt="image.prompt" class="">
-        </div>
+      <div class="mt-20 columns-3 ">
+        <template class="" v-for="image in dataImages" :key="image.id">
+          <!-- <img :src="image.src" :alt="image.prompt" class="" /> -->
+          <NuxtImg :src="image.src" :alt="image.prompt"  loading="lazy"/>
+        </template>
       </div>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import axios from 'axios'
-import { NForm, NInput, NInputNumber, NFormItem, NButton, NCheckbox, NSpace } from 'naive-ui'
-import { useImageStore } from '@/store/imageStore'
-import {ImagesTypes} from '@/types/images'
+import { storeToRefs } from "pinia";
+import {
+  NForm,
+  NInput,
+  NInputNumber,
+  NFormItem,
+  NButton,
+  NCheckbox,
+  NSpace,
+  useNotification,
+} from "naive-ui";
+import { clienteAxios } from "@/helpers/clienteAxios";
+import { useImageStore } from "@/store/imageStore";
+import { ImagesTypes } from "@/types/images";
+//store
+const { imageQuery, imageLimit, allowNsfw, dataImages,imageLoading } = storeToRefs(
+  useImageStore()
+);
 
-const { imageQuery, imageLimit, allowNsfw,dataImages } = storeToRefs(useImageStore())
+//Configs
+const notification = useNotification();
 
-const getImages = async () => {
-  // const { data, error } = await useAsyncData("http://192.168.1.8:3000", () => $fetch(`/api/images/searchengine?q=${imageQuery.value}&limit=${imageLimit.value}`))
-  // if (error) {
-  //   console.log(error.value)
-  // }
-  const BASEURL = "http://192.168.1.8:3000"
-  const response = await axios.get(`${BASEURL}/api/images/searchengine?q=${imageQuery.value}&limit=${imageLimit.value}`)
-  console.log(response.data)
 
-  dataImages.value = [...dataImages.value,...response.data]
-
-}
+//validaciones
 const RULES = {
   imageQuery: [
     {
       required: true,
-      message: 'Please enter a query',
-      trigger: 'blur'
-    }
+      message: "Please enter a query",
+      trigger: "blur",
+    },
   ],
   imageLimit: [
     {
       required: true,
-      message: 'Please enter a limit',
-      trigger: 'blur'
-    }
-  ]
-}
+      message: "Please enter a limit",
+      trigger: "blur",
+    },
+  ],
+};
+//metodos
+const getImages = async () => {
+  imageLoading.value = true
+  if([imageQuery.value].includes('')){
+     notification.info({
+      title: 'Warning',
+      description: 'Please fill in all the fields',
+      duration: 2000
+    })
+    imageLoading.value = false
+    return 
+  }
+  try {
+    const response = await clienteAxios.get<ImagesTypes[]>(
+      `/api/images/searchengine?q=${imageQuery.value}&limit=${imageLimit.value}&nsfw=${allowNsfw.value ? 1 : 0}`
+    );
+    const uniqueImages = [...dataImages.value, ...response.data]
+    .filter((image, index, self) => index === self.findIndex((t) => t.id === image.id));
 
-
+    dataImages.value = [...uniqueImages];
+    notification.success({
+      title: "Success",
+      description: "Images search successfully",
+      duration: 2000,
+    });
+  } catch (error) {
+    console.log(error);
+  }finally{
+    imageLoading.value = false
+  }
+};
+/**
+ * TODO:Quedan pendientes los estilos para images
+ */
 
 </script>
 
