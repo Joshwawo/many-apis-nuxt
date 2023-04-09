@@ -19,6 +19,9 @@ dependencies:
   chalk:
     specifier: 5.2.0
     version: 5.2.0
+  cohere-ai:
+    specifier: 6.2.0
+    version: 6.2.0
   mongoose:
     specifier: 7.0.3
     version: 7.0.3
@@ -1909,6 +1912,10 @@ packages:
   /co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
+    dev: false
+
+  /cohere-ai@6.2.0:
+    resolution: {integrity: sha512-nKUutFpbTQ1TJji3RAmKq9+UKQyf2MrI2qAeOPPZuGlch734XT5KltMUd/AXDY7IAdGHbB8v6VNIEO3qSVST5g==}
     dev: false
 
   /color-convert@1.9.3:
