@@ -25,7 +25,7 @@ import { NConfigProvider, darkTheme, NNotificationProvider } from 'naive-ui'
 
 <style >
 
-body {
+html {
   background-color: #1a202c;
 }
 </style>

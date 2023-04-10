@@ -24,6 +24,5 @@ export default defineEventHandler(async (event) => {
         statusCode: error.response?.status,
         message: error.response?.data?.reason,
     });
-    console.log(error);
   }
 });
