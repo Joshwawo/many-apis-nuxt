@@ -1,6 +1,6 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
-import {ImagesTypes} from '@/types/images'
+import type {ImagesTypes,ImgSusRandomTypes} from '@/types/images'
 
 export const useImageStore = defineStore("images", () =>{
 
@@ -9,13 +9,15 @@ export const useImageStore = defineStore("images", () =>{
   const allowNsfw = ref(true)
   const dataImages = ref<ImagesTypes[]>([])
   const imageLoading = ref(false)
+  const randomSusImg = ref<ImgSusRandomTypes>({} as ImgSusRandomTypes)
 
   return {
     imageQuery,
     imageLimit,
     allowNsfw,
     dataImages,
-    imageLoading
+    imageLoading,
+    randomSusImg
   }
 
 })

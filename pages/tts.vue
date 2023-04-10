@@ -66,9 +66,10 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, watch } from 'vue'
 import axios from 'axios'
-import { useTssStore } from '@/store/tssStore'
 import { storeToRefs } from 'pinia'
 import { NSpace, NSelect, NInput, NForm, NFormItem, NButton, useNotification, NP, NH2 } from 'naive-ui'
+import {clienteAxios} from '@/helpers/clienteAxios'
+import { useTssStore } from '@/store/tssStore'
 import { dateFormater } from '@/helpers/formaters'
 definePageMeta({
   title: 'Texto to speech',
@@ -104,7 +105,7 @@ const notification = useNotification()
 //Para garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modeloPara garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modelo
 const getVoices = async () => {
   try {
-    const response = await axios.get(`http://localhost:3000/api/voices/all-voice?mode=tts-basic&lang=${langSelected.value}`)
+    const response = await clienteAxios.get(`/api/voices/all-voice?mode=tts-basic&lang=${langSelected.value}`)
     dataVoice.value = response.data
 
   } catch (error) {
@@ -125,12 +126,18 @@ const voiceGeneratedFn = async () => {
   }
   try {
 
-    const urlBase = "http://localhost:3000/api/voices/voice"
-    const response = await axios.post(urlBase, {
+
+    const response = await clienteAxios.post(`/api/voices/voice`, {
       voice: selectedVoice.value?.split('|')[0].trim(),
       tts: prompt.value,
       display_voice: selectedVoice.value?.split('|')[1].trim(),
     })
+
+    // const response = await axios.post(urlBase, {
+    //   voice: selectedVoice.value?.split('|')[0].trim(),
+    //   tts: prompt.value,
+    //   display_voice: selectedVoice.value?.split('|')[1].trim(),
+    // })
     console.log(response.data)
     voiceGenerate.value = [...voiceGenerate.value, response.data]
     notification.success({

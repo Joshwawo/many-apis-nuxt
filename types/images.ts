@@ -15,3 +15,8 @@ export interface ImagesTypes {
   promptid: string;
   nsfw:     boolean;
 }
+
+export interface ImgSusRandomTypes {
+  susImg: string;
+  nsfw:   boolean;
+}
