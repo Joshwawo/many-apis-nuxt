@@ -15,7 +15,7 @@ import { NConfigProvider, darkTheme, NNotificationProvider } from 'naive-ui'
               <NuxtLink to="/images" class="hover:text-gray-400" >Images</NuxtLink>
             </nav>
           </header>
-          <NuxtPage />
+          <NuxtPage  class="mt-10"/>
         </NNotificationProvider>
       </NConfigProvider>
     </div>

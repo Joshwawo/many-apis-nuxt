@@ -12,3 +12,33 @@ export const clientAxiosClash = axios.create({
     Accept: "application/json ; charset=utf-8",
   },
 });
+
+export const clienteAxiosUberduck = axios.create({
+  baseURL: "https://api.uberduck.ai",
+  headers: {
+    accept: "application/json",
+    "uberduck-id": "anonymous",
+    "content-type": "application/json",
+    Authorization: `Basic ${process.env?.API_KEY_UBERDUCK}`,
+  },
+});
+
+export const clienteAxiosLol = axios.create({
+  baseURL: "https://la1.api.riotgames.com/lol",
+  headers: {
+    "Accept-Language": "en-US,en;q=0.9,es;q=0.8,my;q=0.7",
+    "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+    Origin: "https://developer.riotgames.com",
+    "X-Riot-Token": `${process.env?.NUXT_LOL_API_KEY}`,
+  },
+});
+
+export const clienteAxiosLolAmericas = axios.create({
+  baseURL: "https://americas.api.riotgames.com/lol",
+  headers: {
+    "Accept-Language": "en-US,en;q=0.9,es;q=0.8,my;q=0.7",
+    "Accept-Charset": "application/x-www-form-urlencoded; charset=UTF-8",
+    Origin: "https://developer.riotgames.com",
+    "X-Riot-Token": `${process.env?.NUXT_LOL_API_KEY}`,
+  },
+});

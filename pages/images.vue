@@ -28,10 +28,10 @@
       <NButton :attr-type="'submit'" :disabled="imageLoading" class="mt-5">Search</NButton>
     </NForm>
     <template v-if="dataImages.length > 0">
-      <div class="mt-20 columns-3 ">
+      <div class="mt-20 columns-5">
         <template class="" v-for="image in dataImages" :key="image.id">
           <!-- <img :src="image.src" :alt="image.prompt" class="" /> -->
-          <NuxtImg :src="image.src" :alt="image.prompt"  loading="lazy"/>
+          <NuxtImg :src="image.src" :alt="image.prompt" class="pt-4" loading="lazy"/>
         </template>
       </div>
     </template>

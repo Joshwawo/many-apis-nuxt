@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto mt-10">
+  <div class="container mx-auto">
     <NForm :rules="RULES">
       <NSpace vertical>
         <NFormItem path="voice" label="Voice actor">
