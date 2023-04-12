@@ -19,7 +19,7 @@ export default defineNuxtConfig({
           : [],
     },
   },
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxt/image-edge"],
   routeRules: {
     "/examples/*": { redirect: "/redirect-route" },
     "/modify-headers-route": {
@@ -29,4 +29,8 @@ export default defineNuxtConfig({
     },
     "/spa": { ssr: false },
   },
+   typescript:{
+    strict: true,
+   },
+   
 });
