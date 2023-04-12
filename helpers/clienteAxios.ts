@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const clienteAxios = axios.create({
-  baseURL: process.env.NODE_ENV === "development" ? "http://localhost:3000" : "https://many-apis-nuxt.vercel.app",
+  baseURL: process.env?.NODE_ENV === "development" ? "http://localhost:3000" : "https://many-apis-nuxt.vercel.app",
 });
 
 export const clientAxiosClash = axios.create({
