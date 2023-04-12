@@ -5,7 +5,7 @@
         <NInput
           v-model:value="imageQuery"
           type="text"
-          placeholder="Escribe algo"
+          placeholder="Write something"
           show-count
           :style="{}"
         />
@@ -53,6 +53,13 @@ import {
 import { clienteAxios } from "@/helpers/clienteAxios";
 import { useImageStore } from "@/store/imageStore";
 import { ImagesTypes } from "@/types/images";
+
+definePageMeta({
+  title: "Images",
+  description: "Images Page Description",
+  keywords: "Images Page Keywords",
+});
+
 //store
 const { imageQuery, imageLimit, allowNsfw, dataImages,imageLoading } = storeToRefs(
   useImageStore()

@@ -18,7 +18,7 @@
 
       <NSpace vertical>
         <NFormItem path="prompt" label="Prompt">
-          <NInput v-model:value="prompt" type="textarea" placeholder="Escribe algo" show-count :style="{
+          <NInput v-model:value="prompt" type="textarea" placeholder="Say anything" show-count :style="{
             width: '100%',
             height: '200px',
 
@@ -29,7 +29,7 @@
         characters or accents from the entered text. This means that only letters and numbers will be preserved in the
         final result. This function is used to prevent errors in text processing by the model.</p>
       <NButton class="mt-5  w-full text-center text-white" type="primary" @click="voiceGeneratedFn" :disabled="loading">
-        Enviar</NButton>
+        Send</NButton>
 
     </NForm>
 
@@ -49,13 +49,18 @@
             <p class="mb-3">{{ voice.display_voice }}</p>
           </div>
           <div>
-            <p class="text-xl font-semibold">Initial created</p>
+            <p class="text-xl font-semibold">Model name</p>
+            <p>{{ voice.voice_actor }}</p>
+          </div>
+          <div>
+            <p class="text-xl font-semibold">Starter at</p>
             <p class="mb-3">{{ dateFormater(voice.started_at) }}</p>
           </div>
           <div>
-            <p class="text-xl font-semibold">Final created </p>
+            <p class="text-xl font-semibold">finished at </p>
             <p>{{ dateFormater(voice.finished_at) }}</p>
           </div>
+          
         </div>
 
       </div>
@@ -64,10 +69,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, watch } from 'vue'
-import axios from 'axios'
+import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
-import { NSpace, NSelect, NInput, NForm, NFormItem, NButton, useNotification, NP, NH2 } from 'naive-ui'
+import { NSpace, NSelect, NInput, NForm, NFormItem, NButton, useNotification,} from 'naive-ui'
 import {clienteAxios} from '@/helpers/clienteAxios'
 import { useTssStore } from '@/store/tssStore'
 import { dateFormater } from '@/helpers/formaters'
@@ -133,12 +137,6 @@ const voiceGeneratedFn = async () => {
       display_voice: selectedVoice.value?.split('|')[1].trim(),
     })
 
-    // const response = await axios.post(urlBase, {
-    //   voice: selectedVoice.value?.split('|')[0].trim(),
-    //   tts: prompt.value,
-    //   display_voice: selectedVoice.value?.split('|')[1].trim(),
-    // })
-    console.log(response.data)
     voiceGenerate.value = [...voiceGenerate.value, response.data]
     notification.success({
       title: 'Success',

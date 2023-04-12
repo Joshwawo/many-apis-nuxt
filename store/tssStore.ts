@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 import type { AllVoices, ResVoices } from "@/types/tss";
 
 export const useTssStore = defineStore("tts", () => {
-  const selectedVoice = ref("");
+  const selectedVoice = ref<string| null>(null);
   const langSelected = ref("english");
   const listLangs = ref([
     {
