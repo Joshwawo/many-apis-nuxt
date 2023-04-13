@@ -1,5 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig:{
+    //the private key is not exposed to the client
+    app:{
+      
+    },
+    public:{
+      nuxtApiClash: process.env.NUXT_API_CLASH,
+      nuxtApiUberDuck: process.env.NUXT_API_KEY_UBERDUCK,
+      nuxtApiLol: process.env.NUXT_LOL_API_KEY,
+
+    }
+
+   },
   build: {
     transpile:
       process.env.NODE_ENV === "production"
@@ -18,6 +31,8 @@ export default defineNuxtConfig({
           ? ["naive-ui", "vueuc", "date-fns-tz/esm/formatInTimeZone"]
           : [],
     },
+    
+
   },
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxt/image-edge"],
   routeRules: {
@@ -33,4 +48,7 @@ export default defineNuxtConfig({
     strict: true,
    },
    
-});
+   
+   
+   
+} );
