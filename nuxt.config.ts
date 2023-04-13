@@ -18,6 +18,8 @@ export default defineNuxtConfig({
           ? ["naive-ui", "vueuc", "date-fns-tz/esm/formatInTimeZone"]
           : [],
     },
+    
+
   },
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxt/image-edge"],
   routeRules: {
@@ -32,5 +34,13 @@ export default defineNuxtConfig({
    typescript:{
     strict: true,
    },
+   privateRuntimeConfig:{
+    NUXT_API_CLASH: process.env.NUXT_API_CLASH,
+    NUXT_LOL_API_KEY: process.env.NUXT_LOL_API_KEY,
+    API_KEY_UBERDUCK: process.env.API_KEY_UBERDUCK,
+
+   }
    
-});
+   
+   
+} as any);
