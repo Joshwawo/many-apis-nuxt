@@ -39,6 +39,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import { storeToRefs } from "pinia";
 import {
   NForm,
@@ -50,7 +51,7 @@ import {
   NSpace,
   useNotification,
 } from "naive-ui";
-import { clienteAxios } from "@/helpers/clienteAxios";
+// import { clienteAxios } from "@/helpers/clienteAxios";
 import { useImageStore } from "@/store/imageStore";
 import { ImagesTypes } from "@/types/images";
 
@@ -99,9 +100,10 @@ const getImages = async () => {
     return 
   }
   try {
-    const response = await clienteAxios.get<ImagesTypes[]>(
+    const response = await axios.get<ImagesTypes[]>(
       `/api/images/searchengine?q=${imageQuery.value}&limit=${imageLimit.value}&nsfw=${allowNsfw.value ? 1 : 0}`
     );
+    console.log(response.data);
     const uniqueImages = [...dataImages.value, ...response.data]
     .filter((image, index, self) => index === self.findIndex((t) => t.id === image.id));
 

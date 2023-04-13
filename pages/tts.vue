@@ -69,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import { computed, onMounted, watch } from 'vue'
 import { storeToRefs } from 'pinia'
 import { NSpace, NSelect, NInput, NForm, NFormItem, NButton, useNotification,} from 'naive-ui'
@@ -109,7 +110,7 @@ const notification = useNotification()
 //Para garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modeloPara garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modelo
 const getVoices = async () => {
   try {
-    const response = await clienteAxios.get(`/api/voices/all-voice?mode=tts-basic&lang=${langSelected.value}`)
+    const response = await axios.get(`/api/voices/all-voice?mode=tts-basic&lang=${langSelected.value}`)
     dataVoice.value = response.data
 
   } catch (error) {
@@ -131,7 +132,7 @@ const voiceGeneratedFn = async () => {
   try {
 
 
-    const response = await clienteAxios.post(`/api/voices/voice`, {
+    const response = await axios.post(`/api/voices/voice`, {
       voice: selectedVoice.value?.split('|')[0].trim(),
       tts: prompt.value,
       display_voice: selectedVoice.value?.split('|')[1].trim(),

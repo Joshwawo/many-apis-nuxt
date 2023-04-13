@@ -7,14 +7,15 @@
 </template>
 
 <script setup lang="ts">
+import axios from 'axios'
 import {storeToRefs} from 'pinia'
 import {useImageStore} from '../store/imageStore'
-import { clienteAxios } from '~/helpers/clienteAxios';
+// import { clienteAxios } from '~/helpers/clienteAxios';
 import {ImgSusRandomTypes} from '@/types/images'
 const {randomSusImg} = storeToRefs(useImageStore())
 
 const getSusImg = async () => {
-   const response =  await clienteAxios.get<ImgSusRandomTypes>('/api/images/sus-random')
+   const response =  await axios.get<ImgSusRandomTypes>('/api/images/sus-random')
    randomSusImg.value = response.data
    console.log(response.data)
 }

@@ -1,5 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig:{
+    //the private key is not exposed to the client
+    app:{
+      
+    },
+    public:{
+      nuxtApiClash: process.env.NUXT_API_CLASH,
+      nuxtApiUberDuck: process.env.NUXT_API_KEY_UBERDUCK,
+      nuxtApiLol: process.env.NUXT_LOL_API_KEY,
+
+    }
+
+   },
   build: {
     transpile:
       process.env.NODE_ENV === "production"
@@ -34,13 +47,8 @@ export default defineNuxtConfig({
    typescript:{
     strict: true,
    },
-   privateRuntimeConfig:{
-    NUXT_API_CLASH: process.env.NUXT_API_CLASH,
-    NUXT_LOL_API_KEY: process.env.NUXT_LOL_API_KEY,
-    API_KEY_UBERDUCK: process.env.API_KEY_UBERDUCK,
-
-   }
    
    
    
-} as any);
+   
+} );
