@@ -1,5 +1,6 @@
 import {Schema, model} from 'mongoose';
 import type {susImagesTypes} from '@/server/types/images'
+import { models } from 'mongoose';
 
 const ImagesSchema = new Schema<susImagesTypes>({
     susImage:{
@@ -12,5 +13,5 @@ const ImagesSchema = new Schema<susImagesTypes>({
     }, 
 }, {timestamps: true})
 
-const ImageModel = model("images", ImagesSchema);
+const ImageModel = models.images || model("images", ImagesSchema);
 export default ImageModel;

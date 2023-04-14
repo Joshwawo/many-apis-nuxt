@@ -42,6 +42,7 @@ export default defineEventHandler(async (event) => {
    
       console.log("Bandera 2 - postVoice 🟠");
     } catch (error:any) {
+      console.log(error);
       throw createError({
         statusCode: 404,
       message: error.response.data.detail,

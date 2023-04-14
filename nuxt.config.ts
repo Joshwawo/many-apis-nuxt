@@ -10,7 +10,7 @@ export default defineNuxtConfig({
       nuxtApiUberDuck: process.env.NUXT_API_KEY_UBERDUCK,
       nuxtApiLol: process.env.NUXT_LOL_API_KEY,
 
-    }
+    },
 
    },
   build: {
