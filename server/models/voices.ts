@@ -1,5 +1,6 @@
 import {Schema, model} from 'mongoose';
 import {resVoices} from '../types/voices';
+import { models } from 'mongoose';
 
 
 
@@ -51,5 +52,5 @@ const newVoicesSchema = new Schema<resVoices>({
   
 }
 )
-const NewVoicesModel = model('NewVoices', newVoicesSchema);
+const NewVoicesModel = models.NewVoices || model('NewVoices', newVoicesSchema);
 export default NewVoicesModel;

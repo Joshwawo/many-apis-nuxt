@@ -108,9 +108,11 @@ onMounted(() => {
 
 const notification = useNotification()
 //Para garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modeloPara garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modelo
+const URLBASE = "https://many-apis-nuxt.vercel.app/"
+const LH300 = "http://localhost:3000"
 const getVoices = async () => {
   try {
-    const response = await axios.get(`/api/voices/all-voice?mode=tts-basic&lang=${langSelected.value}`)
+    const response = await axios.get(`${URLBASE}/api/voices/all-voice?mode=tts-basic&lang=${langSelected.value}`)
     dataVoice.value = response.data
 
   } catch (error) {
@@ -132,7 +134,7 @@ const voiceGeneratedFn = async () => {
   try {
 
 
-    const response = await axios.post(`/api/voices/voice`, {
+    const response = await axios.post(`${URLBASE}/api/voices/voice`, {
       voice: selectedVoice.value?.split('|')[0].trim(),
       tts: prompt.value,
       display_voice: selectedVoice.value?.split('|')[1].trim(),

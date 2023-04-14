@@ -7,6 +7,7 @@ export default defineEventHandler(async (event) => {
       message: "mode is required",
     });
   }
+
   try {
     let url;
     url = `/voices?mode=${mode}`;
@@ -18,6 +19,6 @@ export default defineEventHandler(async (event) => {
     const response = await clienteAxiosUberduck.get(url);
     return response.data;
   } catch (error : any) {
-    console.log(error.response.data);
+    console.log(error);
   }
 });
