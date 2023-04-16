@@ -13,5 +13,4 @@ const ImagesSchema = new Schema<susImagesTypes>({
     }, 
 }, {timestamps: true})
 
-const ImageModel = models.images || model("images", ImagesSchema);
-export default ImageModel;
+export default model("images", ImagesSchema);

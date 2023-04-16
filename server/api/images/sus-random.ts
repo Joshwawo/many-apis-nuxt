@@ -1,8 +1,8 @@
-import {connectDB} from '@/server/config/config'
+// import {connectDB} from '~/server/configs/config'
 import SusModel from '@/server/models/sus'
 
 export default defineEventHandler(async(event) =>{
-    await connectDB()
+    // await connectDB()
     const {nsfw} = getQuery(event)
     const nsfwQ = nsfw === "true" ? true : false
     const susImages = await SusModel.find()

@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   runtimeConfig:{
     //the private key is not exposed to the client
+    NUXT_MONGO_URI: process.env.NUXT_MONGO_URI,
     app:{
       
     },
@@ -13,6 +14,9 @@ export default defineNuxtConfig({
     },
 
    },
+  nitro:{
+    plugins: ["@/server/config/index.ts"]
+  },
   build: {
     transpile:
       process.env.NODE_ENV === "production"
@@ -34,7 +38,7 @@ export default defineNuxtConfig({
     
 
   },
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxt/image-edge"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "@nuxt/image-edge", "@nuxt/devtools"],
   routeRules: {
     "/examples/*": { redirect: "/redirect-route" },
     "/modify-headers-route": {
