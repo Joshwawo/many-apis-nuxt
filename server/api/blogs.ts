@@ -1,4 +1,4 @@
-import {connectDB} from '../config/config'
+import {connectDB} from '../configs/config'
 import BlogModel from '../models/blog'
 
 

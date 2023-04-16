@@ -108,7 +108,7 @@ onMounted(() => {
 
 const notification = useNotification()
 //Para garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modeloPara garantizar la precisión del procesamiento, eliminamos automáticamente cualquier carácter especial o acento del texto que ingreses. De esta manera, solo se conservarán letras y números en el resultado final. Esta función se utiliza para evitar errores en el procesamiento de texto por parte del modelo
-const URLBASE = "https://many-apis-nuxt.vercel.app/"
+const URLBASE = "https://many-apis-nuxt.vercel.app"
 const LH300 = "http://localhost:3000"
 const getVoices = async () => {
   try {

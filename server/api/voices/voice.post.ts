@@ -1,7 +1,7 @@
 import "dotenv/config";
 import axios, { AxiosResponse } from "axios";
 import chalk from 'chalk';
-import {connectDB} from '@/server/config/config';
+// import {connectDB} from '~/server/configs/config';
 import type {resVoices,bodyVoices} from '@/server/types/voices'
 import VoicesModel from '@/server/models/voices'
 import {clienteAxiosUberduck} from '@/helpers/clienteAxios'
@@ -23,7 +23,7 @@ const getVoiceStatus = async(uuid: string): Promise<resVoices> =>{
 
 export default defineEventHandler(async (event) => {
   
-  await connectDB();
+  // await connectDB();
   console.log("Bandera 1 - defineEventHandler 🔵");
   const body: bodyVoices = await readBody(event);
   if(!body.tts || !body.voice){
